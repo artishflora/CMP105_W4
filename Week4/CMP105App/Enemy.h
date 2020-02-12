@@ -13,7 +13,7 @@ class Enemy :
 		Enemy();
 		~Enemy();
 
-		void handleInput(float dt);
+		void handleInput(float dt) override;
 		void handleWindow(sf::RenderWindow* win);
 
 		int speed;

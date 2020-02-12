@@ -29,6 +29,13 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	window->setMouseCursorVisible(false);
 	cursor.getWindow(window);
 	cursor.setInput(input);
+
+	bckgrnd.loadFromFile("gfx/Level1_1.png");
+	background.setTexture(&bckgrnd);
+	background.setSize(sf::Vector2f(10038, 675));
+	sf::View currview = window->getView();
+	background.view = &currview;
+	background.setInput(input);
 }
 
 Level::~Level()
@@ -53,13 +60,15 @@ void Level::update(float dt)
 	player.handleInput(dt);
 	enemy.handleInput(dt);
 	cursor.update();
+	background.handleInput(dt);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
-
+	
+	window->draw(background);
 	window->draw(player);
 	window->draw(enemy);
 	window->draw(cursor);
